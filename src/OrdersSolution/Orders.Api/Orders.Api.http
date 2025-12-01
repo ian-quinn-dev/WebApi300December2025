@@ -1,0 +1,6 @@
+@Orders.Api_HostAddress = https://orders.dev.localhost:7054
+
+GET {{Orders.Api_HostAddress}}/Orders/
+Accept: application/json
+
+###
