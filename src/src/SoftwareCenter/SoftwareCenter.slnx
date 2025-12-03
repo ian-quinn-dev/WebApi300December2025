@@ -1,0 +1,21 @@
+<Solution>
+    <Folder Name="/AspireHosting/">
+        <File Path=".editorconfig" />
+        <Project Path="AspireHosting\AppHost\AppHost.csproj" />
+    </Folder>
+    <Folder Name="/Services/" />
+    <Folder Name="/Services/BFF/">
+        <Project Path="Services\BackendForFrontend\BackendForFrontend.Api\BackendForFrontend.Api.csproj" />
+    </Folder>
+    <Folder Name="/Services/Catalog/">
+        <Project Path="Services/Catalog.Api/Catalog.Api.csproj" />
+    </Folder>
+    <Folder Name="/Services/Vendors/">
+        <Project Path="Services/Vendors/Vendors.Api.Tests/Vendors.Api.Tests.csproj" />
+        <Project Path="Services/Vendors/Vendors.Api/Vendors.Api.csproj" />
+    </Folder>
+    <Folder Name="/Services/_Common/">
+        <Project Path="Services/Common/ServiceDefaults/ServiceDefaults.csproj" />
+        <Project Path="Services/SoftwareCenter.Core/SoftwareCenter.Core.csproj" />
+    </Folder>
+</Solution>

@@ -1,0 +1,67 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Vendors.Api | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://vendorsapi-dashboard.dev.localhost:15100/"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Vendors.Api"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://localhost:9069/software/authorize",
+            "tokenUrl": "http://localhost:9069/software/token",
+            "scopes": {
+              "api": "Access the Weather API",
+              "openid": "Access the OpenID Connect user profile",
+              "email": "Access the user's email address",
+              "profile": "Access the user's profile"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "api",
+        "profile",
+        "email",
+        "openid"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Vendors.Api"
+    }
+  ]
+}

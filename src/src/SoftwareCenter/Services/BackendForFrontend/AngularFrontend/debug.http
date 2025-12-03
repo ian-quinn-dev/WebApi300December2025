@@ -1,0 +1,29 @@
+GET https://localhost:12443
+
+
+###
+
+GET http://localhost:64227/software-center/.well-known/openid-configuration
+
+
+### Get Access Token For Earl - SoftwareCenter Role
+
+POST http://localhost:64227/software-center/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_id=software-center&client_secret=secret&scope=api.read&audience=software-center-api&code=earl
+
+
+### Get Access Token For Alice - Just an Employee
+
+POST http://localhost:64227/software-center/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_id=software-center&client_secret=secret&scope=api.read&audience=software-center-api&code=alice
+
+### Get Access Token For Mary - SoftwareCenter Role, and Manager Role
+
+POST http://localhost:64227/software-center/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_id=software-center&client_secret=secret&scope=api.read&audience=software-center-api&code=mary

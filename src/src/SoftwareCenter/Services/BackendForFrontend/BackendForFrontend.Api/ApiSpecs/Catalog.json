@@ -1,0 +1,61 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Catalog API",
+    "description": "API for managing the software catalog",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://catalogapi-dashboard.dev.localhost:14100/"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Catalog.Api"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://localhost:9069/software/authorize",
+            "tokenUrl": "http://localhost:9069/software/token",
+            "scopes": { }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "catalog.api",
+        "openid"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Catalog.Api"
+    }
+  ]
+}

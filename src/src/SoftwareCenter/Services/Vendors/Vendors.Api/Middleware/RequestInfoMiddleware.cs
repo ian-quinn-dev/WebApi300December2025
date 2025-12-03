@@ -1,0 +1,1 @@
+namespace Vendors.Api.Middleware;

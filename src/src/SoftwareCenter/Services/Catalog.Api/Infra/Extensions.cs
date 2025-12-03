@@ -1,0 +1,100 @@
+using System.Reflection;
+using Marten;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Wolverine;
+using Wolverine.Marten;
+
+namespace Catalog.Api.Infra;
+
+public static class Extensions
+{
+    private static string CorsPolicyName => Assembly.GetCallingAssembly().GetName().Name ??= "Api";
+
+    extension(WebApplicationBuilder builder)
+    {
+        public WebApplicationBuilder AddPersistenceAndMessaging(string dataSourceName)
+        {
+            builder.AddNpgsqlDataSource(dataSourceName);
+
+            builder.Host.UseWolverine((options) =>
+            {
+                options.Policies.AutoApplyTransactions();
+                options.Policies.AutoApplyTransactions();
+            });
+
+            builder.Services.AddMarten(options => { })
+                .UseNpgsqlDataSource()
+                .UseLightweightSessions()
+                .IntegrateWithWolverine();
+            return builder;
+        }
+
+        public WebApplicationBuilder AddCorsForDevelopment()
+        {
+            builder.Services.AddCors(corsOptions =>
+            {
+                corsOptions.AddPolicy(CorsPolicyName, pol =>
+                {
+                    pol.AllowAnyOrigin();
+                    pol.AllowAnyHeader();
+                    pol.AllowAnyMethod();
+                });
+                corsOptions.DefaultPolicyName = CorsPolicyName;
+            });
+            return builder;
+        }
+
+        /// <summary>
+        /// Used to configure OpenAPI generation for API
+        /// </summary>
+        /// <param name="apiName">like "vendors"</param>
+        /// <param name="apiVersion">like "v1"</param>
+        /// <returns></returns>
+        public WebApplicationBuilder AddDevelopmentOpenApiGeneration(string apiName, string apiVersion)
+        {
+            var baseVersion = $"{apiName}.{apiVersion}";
+            var bffVersion = $"{apiName}.bff.{apiVersion}";
+            
+            builder.Services.AddOpenApi(baseVersion,
+                options => options.AddDocumentTransformer<CatalogOpenApiTransform>());
+            
+            builder.Services.AddOpenApi(bffVersion, (options) => options.AddDocumentTransformer<CatalogBffPathTransformer>());
+            return builder;
+        }
+    }
+
+    extension(WebApplication app)
+    {
+        public WebApplication MapOpenApiForDevelopment()
+        {
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseCors(CorsPolicyName);
+
+                app.MapOpenApi().AllowAnonymous();
+            }
+
+            return app;
+        }
+    }
+
+    extension(IServiceCollection services)
+    {
+        public IServiceCollection AddAuthenticationSchemes()
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.MetadataAddress = options.Authority + "/.well-known/openid-configuration";
+                    options.MapInboundClaims = false;
+                });
+
+            return services;
+        }
+
+        public IServiceCollection AddAuthorizationAndPolicies()
+        {
+            return services.AddAuthorization();
+        }
+    }
+}

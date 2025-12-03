@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/AspireHosting/">
+    <Project Path="AppHost/AppHost.csproj" />
+    <Project Path="ServiceDefaults/ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/Gateways/">
+    <Project Path="ApiGateway/ApiGateway.csproj" />
+  </Folder>
+  <Folder Name="/Services/">
+    <Project Path="EmployeeManager.Api/EmployeeManager.Api.csproj" />
+    <Project Path="Employees.Api/Employees.Api.csproj" />
+    <Project Path="EmployeesCommon/EmployeesCommon.csproj" Id="c1a4ace6-3b76-4c8d-acd2-f45ef3d1978b" />
+    <Project Path="UpdatedAndNewEmployeeApi/UpdatedAndNewEmployeeApi.csproj" />
+  </Folder>
+</Solution>

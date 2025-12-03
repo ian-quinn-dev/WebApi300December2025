@@ -1,0 +1,153 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Vendors API",
+    "description": "API for managing vendors",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://vendorsapi-dashboard.dev.localhost:15100/"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "POST /vendors",
+        "description": "Allows a manager to add a new vendor to the system.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateVendorResponseModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateVendorRequestModel": {
+        "required": [
+          "name",
+          "description",
+          "pointOfContactName"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "pointOfContactName": {
+            "type": "string"
+          },
+          "pointOfContactEmail": {
+            "type": "string"
+          },
+          "pointOfContactPhone": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateVendorResponseModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "managerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "pointOfContact": {
+            "$ref": "#/components/schemas/VendorPointOfContact"
+          }
+        }
+      },
+      "VendorPointOfContact": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "phone": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://localhost:9069/software/authorize",
+            "tokenUrl": "http://localhost:9069/software/token",
+            "scopes": { }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "vendors.api",
+        "openid"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Vendors"
+    }
+  ]
+}

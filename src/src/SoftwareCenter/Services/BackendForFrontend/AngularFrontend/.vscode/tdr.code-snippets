@@ -1,0 +1,29 @@
+
+{
+  "TDR Doc": {
+    "scope": "markdown",
+    "prefix": "tdr",
+    "description": "A Technical Discussion Record",
+    "body": [
+      "# ${1:${TM_FILENAME_BASE/${1:/pascalcase}/}}",
+      "",
+      "> ${2:Short description of the proposal}",
+      "",
+      "## Motivation",
+      "",
+      "$3",
+      "",
+      "## Solution",
+      "",
+      "$4",
+      "",
+      "## Alternatives Considered",
+      "",
+      "$5",
+      "",
+      "## Discussion",
+      "",
+      "$0"
+    ]
+  }
+}

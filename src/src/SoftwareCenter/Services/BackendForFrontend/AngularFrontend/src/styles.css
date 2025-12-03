@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+/* @plugin "./ui/themes/frappe.ts"; */
+@plugin "./ui/themes/latte.ts";
+@plugin "./ui/themes/macchiato.ts";
+@plugin "./ui/themes/mocha.ts";

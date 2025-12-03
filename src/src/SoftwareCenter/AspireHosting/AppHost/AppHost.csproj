@@ -1,0 +1,31 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.0.1">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>8d205cd0-c157-4426-9ad8-868e2e5849cf</UserSecretsId>
+        <AssemblyName>Web API 300 Local Dev</AssemblyName>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Services\BackendForFrontend\BackendForFrontend.Api\BackendForFrontend.Api.csproj"/>
+        <ProjectReference Include="..\..\Services\Catalog.Api\Catalog.Api.csproj"/>
+        <ProjectReference Include="..\..\Services\Vendors\Vendors.Api\Vendors.Api.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.0.1"/>
+        <PackageReference Include="Aspire.Npgsql" Version="13.0.1"/>
+        <PackageReference Include="CommunityToolkit.Aspire.Hosting.NodeJS.Extensions" Version="9.9.0"/>
+        <PackageReference Include="Scalar.Aspire" Version="0.7.4"/>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="MockOauth2\.DS_Store"/>
+    </ItemGroup>
+
+</Project>
