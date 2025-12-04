@@ -1,0 +1,22 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.0.1">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>7d7f2456-db34-4abe-bc32-320f9a5eb677</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Aspire.Hosting.Kafka" Version="13.0.2" />
+      <PackageReference Include="Scalar.Aspire" Version="0.7.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ApiClient\ApiClient.csproj" />
+      <ProjectReference Include="..\ApiOneProducer\ApiOneProducer.csproj" />
+      <ProjectReference Include="..\ServiceDefaults\ServiceDefaults.csproj" />
+    </ItemGroup>
+
+</Project>

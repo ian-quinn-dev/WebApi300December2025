@@ -1,6 +1,8 @@
 using System.Reflection;
+using JasperFx.Events.Projections;
 using Marten;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Vendors.Api.Endpoints.ReadModels;
 using Wolverine;
 using Wolverine.Marten;
 
@@ -22,7 +24,10 @@ public static class Extensions
                 options.Policies.AutoApplyTransactions();
             });
 
-            builder.Services.AddMarten(options => { })
+            builder.Services.AddMarten(options =>
+                {
+                    options.Projections.Add<VendorListProjection>(ProjectionLifecycle.Inline);
+                })
                 .UseNpgsqlDataSource()
                 .UseLightweightSessions()
                 .IntegrateWithWolverine();

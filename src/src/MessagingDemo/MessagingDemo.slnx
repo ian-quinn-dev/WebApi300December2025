@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/AspireHosting/">
+    <Project Path="AppHost/AppHost.csproj" />
+    <Project Path="ServiceDefaults/ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/Services/">
+    <Project Path="ApiClient/ApiClient.csproj" />
+    <Project Path="ApiOneProducer/ApiOneProducer.csproj" />
+    <Project Path="Messages/Messages.csproj" />
+  </Folder>
+</Solution>

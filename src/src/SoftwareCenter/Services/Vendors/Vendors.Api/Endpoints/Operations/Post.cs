@@ -34,21 +34,7 @@ public static class Post
                 .WithSummary("POST /vendors")
                 .WithDescription("Allows a manager to add a new vendor to the system.");
 
-            vendorGroup.MapGet("/", () =>
-            {
-                List<VendorItem> vendors = [
-                 new VendorItem {
-                    Id = Guid.NewGuid(),
-                    Name = "Microsoft"
-                },
-              new VendorItem {
-                  Id = Guid.NewGuid(),
-                  Name = "JetBrains"
-              }
-                 ];
-
-                return TypedResults.Ok(vendors);
-            }).RequireAuthorization();
+            
             return vendorGroup;
         }
     }
@@ -63,10 +49,12 @@ public record VendorItem
 [AnyOf(nameof(PointOfContactEmail), nameof(PointOfContactPhone))]
 public record CreateVendorRequestModel : IValidatableObject
 {
-    [MinLength(3)] [MaxLength(50)] public required string Name { get; init; }
+    [MinLength(10)] [MaxLength(50)] public required string Name { get; init; }
 
-    [MaxLength(100)] public required string Description { get; init; }
+    [MinLength(10)] [MaxLength(500)]
+    public required string Description { get; init; }
 
+   
     public required string PointOfContactName { get; init; }
     public string PointOfContactEmail { get; init; } = string.Empty;
     public string PointOfContactPhone { get; init; } = string.Empty;

@@ -18,7 +18,7 @@ public static class VendorApiExtensions
         {
             var vendorGroup = endpoints.MapGroup("/")
                 .WithTags("Vendors");
-
+            vendorGroup.MapGet("/", GetVendors.GetVendorsAsync);
 
             vendorGroup.MapPostVendor();
             return endpoints;

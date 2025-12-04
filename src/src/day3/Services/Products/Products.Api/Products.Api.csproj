@@ -6,23 +6,28 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <NoDefaultLaunchSettingsFile>True</NoDefaultLaunchSettingsFile>
         <IsPackable>true</IsPackable>
+
     </PropertyGroup>
-
+    <PropertyGroup>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <!-- <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath> -->
+    </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\_Core\ShoppingServiceDefaults\ShoppingServiceDefaults.csproj"/>
+        <ProjectReference
+            Include="..\..\_Core\ShoppingServiceDefaults\ShoppingServiceDefaults.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Npgsql" Version="13.0.1"/>
-        <PackageReference Include="Facet" Version="5.1.8"/>
-        <PackageReference Include="Facet.Extensions" Version="5.1.8"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0"/>
-        <PackageReference Include="WolverineFx.Marten" Version="5.4.0"/>
+        <PackageReference Include="Aspire.Npgsql" Version="13.0.1" />
+        <PackageReference Include="Facet" Version="5.1.8" />
+        <PackageReference Include="Facet.Extensions" Version="5.1.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+        <PackageReference Include="WolverineFx.Marten" Version="5.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Endpoints\Management\"/>
+        <Folder Include="Endpoints\Management\" />
     </ItemGroup>
 
 </Project>

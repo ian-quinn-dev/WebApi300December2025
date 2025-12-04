@@ -1,12 +1,12 @@
 import { defineConfig } from '@hey-api/openapi-ts';
 
 export default defineConfig({
-  input: ['./open-api-specs/Software.Api.json'],
+  input: ['./open-api-specs/Vendors.Api.json'],
   output: [
     {
       format: 'prettier',
       lint: 'eslint',
-      path: './src/api-clients/software',
+      path: './src/api-clients/vendors',
     },
   ],
   plugins: [

@@ -3,8 +3,9 @@ import { Field, form, schema, validateStandardSchema } from '@angular/forms/sign
 
 export const createVendorSchema = schema<CreateVendorRequestModel>((path) => validateStandardSchema(path, zCreateVendorRequestModel));
 import { VendorsApi } from './internal/api-client';
-import { CreateVendorRequestModel } from '../api-clients/software';
-import { zCreateVendorRequestModel } from '../api-clients/software/zod.gen';
+import { CreateVendorRequestModel } from '../api-clients/vendors';
+import { zCreateVendorRequestModel } from '../api-clients/vendors/zod.gen';
+
 @Component({
   selector: 'app-vendor-create',
   changeDetection: ChangeDetectionStrategy.OnPush,

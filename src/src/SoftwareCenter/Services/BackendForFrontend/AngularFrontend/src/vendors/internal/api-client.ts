@@ -1,8 +1,13 @@
+// import {
+//   CreateVendorRequestModel,
+//   postApiSoftwareVendors,
+// } from '../../api-clients/software';
+// import { Client, createClient } from '../../api-clients/software/client';
 import {
   CreateVendorRequestModel,
-  postApiSoftwareVendors,
-} from '../../api-clients/software';
-import { Client, createClient } from '../../api-clients/software/client';
+  postApiVendors,
+} from '../../api-clients/vendors';
+import { Client, createClient } from '../../api-clients/vendors/client';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 
@@ -18,6 +23,6 @@ export class VendorsApi {
   }
 
   postVendor(args: CreateVendorRequestModel) {
-    return postApiSoftwareVendors({ client: this.client, body: args });
+    return postApiVendors({ client: this.client, body: args });
   }
 }

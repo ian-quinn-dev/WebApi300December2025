@@ -1,5 +1,5 @@
-import { client } from '../api-clients/software/client.gen';
-import { provideHeyApiClient } from '../api-clients/software/client/client.gen';
+import { client } from '../api-clients/vendors/client.gen';
+import { provideHeyApiClient } from '../api-clients/vendors/client/client.gen';
 import { provideAppAuth } from '../auth/providers';
 import { secureApiInterceptor } from '../auth/secure-api.interceptor';
 import { provideAppTitleStrategy } from '../common/app-title-strategy';

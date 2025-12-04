@@ -7,4 +7,6 @@ public static class GetManagerSummary
 {
 
     // todo: Pick up here tomorrow, show how to do the "Load" thing without Wolverine.
+
+
 }

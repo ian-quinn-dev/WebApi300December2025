@@ -1,9 +1,9 @@
 import { HttpClient, httpResource } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { FeatureNav } from 'app-ui/feature-nav';
-import { client } from '../api-clients/software/client.gen';
+// import { client } from '../api-clients/software/client.gen';
 import { JsonPipe } from '@angular/common';
-
+import { VendorListItem } from '../api-clients/vendors';
 @Component({
   selector: 'app-vendors',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,8 +14,19 @@ import { JsonPipe } from '@angular/common';
     ]">
 
     @if(vendorList.hasValue()) {
-      <pre>{{ vendorList.value() | json}}</pre>
+     @for(vendor of vendorList.value(); track vendor.id) {
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{vendor.name}}</h5>
+            <p class="card-text">{{vendor.description}}</p>
+
+          </div>
+        </div>
+        <pre>{{vendor | json}}</pre>
+      }
     }
+
+
 
     @if(vendorList.isLoading()) {
       <p>Getting your vendors...</p>
@@ -25,14 +36,5 @@ import { JsonPipe } from '@angular/common';
   styles: ``,
 })
 export class Vendors implements OnInit {
-  #client = inject(HttpClient);
-
-  vendorList = httpResource(() => '/api/vendors');
-
-  ngOnInit(): void {
-    client.setConfig({
-      baseUrl: '/api',
-      httpClient: this.#client,
-    })
-  }
+  vendorList = httpResource<VendorListItem[]>(() => '/api/vendors');
 }

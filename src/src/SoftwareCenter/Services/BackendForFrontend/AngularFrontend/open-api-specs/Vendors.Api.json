@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.1",
   "info": {
-    "title": "Vendors.Api | v1",
+    "title": "Vendors.Api | vendors.bff.v1",
     "version": "1.0.0"
   },
   "servers": [
@@ -10,18 +10,46 @@
     }
   ],
   "paths": {
-    "/": {
+    "/api/vendors/": {
       "get": {
-        "tags": [
-          "Vendors.Api"
-        ],
+        "tags": ["Vendors"],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VendorListItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Vendors"],
+        "summary": "POST /vendors",
+        "description": "Allows a manager to add a new vendor to the system.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateVendorResponseModel"
                 }
               }
             }
@@ -31,37 +59,93 @@
     }
   },
   "components": {
-    "securitySchemes": {
-      "oauth2": {
-        "type": "oauth2",
-        "flows": {
-          "authorizationCode": {
-            "authorizationUrl": "http://localhost:9069/software/authorize",
-            "tokenUrl": "http://localhost:9069/software/token",
-            "scopes": {
-              "api": "Access the Weather API",
-              "openid": "Access the OpenID Connect user profile",
-              "email": "Access the user's email address",
-              "profile": "Access the user's profile"
-            }
+    "schemas": {
+      "CreateVendorRequestModel": {
+        "required": ["name", "description", "pointOfContactName"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "minLength": 10,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 500,
+            "minLength": 10,
+            "type": "string"
+          },
+          "pointOfContactName": {
+            "type": "string"
+          },
+          "pointOfContactEmail": {
+            "type": "string"
+          },
+          "pointOfContactPhone": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateVendorResponseModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "managerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "pointOfContact": {
+            "$ref": "#/components/schemas/VendorPointOfContact"
+          }
+        }
+      },
+      "VendorListItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "VendorPointOfContact": {
+        "required": ["id", "name"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": ["null", "string"]
+          },
+          "phone": {
+            "type": ["null", "string"]
           }
         }
       }
     }
   },
-  "security": [
-    {
-      "oauth2": [
-        "api",
-        "profile",
-        "email",
-        "openid"
-      ]
-    }
-  ],
   "tags": [
     {
-      "name": "Vendors.Api"
+      "name": "Vendors"
     }
   ]
 }

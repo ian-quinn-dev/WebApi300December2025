@@ -30,6 +30,7 @@ public static class Extensions
                     options.Projections.Add<ProductReadModelProjection>(ProjectionLifecycle.Inline);
                     options.Projections.Snapshot<InventoryChangeReport>(SnapshotLifecycle.Async);
                     options.Projections.Add<ManagerSummaryProjection>(ProjectionLifecycle.Async);
+
                 }).UseNpgsqlDataSource().UseLightweightSessions().IntegrateWithWolverine()
                 .AddAsyncDaemon(JasperFx.Events.Daemon.DaemonMode.Solo); // turns on the background worker
             return builder;
